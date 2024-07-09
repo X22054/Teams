@@ -1,0 +1,15 @@
+/* 全体のコンテナを定義するスタイル */
+#container{
+    display:flex;
+    width:100%;
+}
+
+/* channelsセクションのスタイル */
+#channels{
+    width:30%;
+}
+
+/* postsセクションのスタイル */
+#posts{
+    width:70%;
+}

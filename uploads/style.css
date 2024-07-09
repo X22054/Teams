@@ -1,0 +1,752 @@
+* {
+    margin: 0 auto;
+    /* 要素を中央寄せにする */
+    /* 余白を0にする */
+    padding: 0;
+    /* 余白を0にする */
+    box-sizing: border-box;
+    /* 要素の幅や高さにpaddingやborderを含める */
+}
+
+*::after,
+*::before {
+    box-sizing: inherit;
+}
+
+
+:root,
+html {
+    scroll-behavior: smooth;
+    font-weight: bold;
+    font-family: 'BIZ UDPGothic', sans-serif;
+    font-size: 14pt;
+    font-feature-settings: "palt";
+    --dark-087: rgba(0, 0, 0, 0.87);
+    --dark-054: rgba(0, 0, 0, 0.54);
+    --dark-026: rgba(0, 0, 0, 0.26);
+    --dark-012: rgba(0, 0, 0, 0.12);
+    --light-100: rgba(255, 255, 255, 1.00);
+    --light-070: rgba(255, 255, 255, 0.70);
+    --light-030: rgba(255, 255, 255, 0.30);
+    --light-012: rgba(255, 255, 255, 0.12);
+    --gray-010: #f1f1f1;
+    --gray-020: #e4e4e4;
+    --primary-050: #D36922;
+    --secondary-050: #2CD47F;
+    --base-bg: var(--dark-087);
+    --text-color: var(--primary-050);
+    --section-margin: 120px;
+}
+
+body {
+    line-height: 1.5;
+}
+
+.popup {
+    /* min-height: 100vh; */
+
+    opacity: 0;
+    transform: translateY(100px);
+}
+
+.popup.active {
+    transition: 1s;
+
+    opacity: 1;
+    transform: translateY(0);
+}
+
+img {
+    line-height: 0;
+    /* 画像の下の余白を削除する */
+    max-width: 100%;
+}
+
+
+
+
+/* header */
+header {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: var(--header);
+    height: 100vh;
+    color: #ffff;
+    background-color: #242424;
+    max-width: 90%;
+    margin-right: 0;
+}
+
+header .header_word {
+    font-size: 3rem;
+}
+
+header .header_word,
+header p {
+    z-index: 2;
+    /* 要素を前面に表示 */
+    margin: 0.5rem;
+    text-align: right;
+}
+
+header .logo {
+    z-index: 2;
+    margin: 0 0.5rem;
+    left: 0;
+
+}
+
+header .header_img {
+    background-image: url(img/homehide.jpg);
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    height: 90%;
+    /* 画面の高さいっぱいに表示 */
+    width: auto;
+    min-width: 80%;
+    /*画像の最小サイズ*/
+    background-repeat: no-repeat;
+    background-position: 70% 30%;
+    background-size: 263% 100%;
+}
+
+.menu-btn {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    height: 60px;
+    width: 60px;
+    justify-content: center;
+    align-items: center;
+    z-index: 90;
+    
+}
+
+.menu-btn span,
+.menu-btn span:before,
+.menu-btn span:after {
+    content: '';
+    display: block;
+    height: 3px;
+    width: 25px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    position: absolute;
+}
+
+.menu-btn span:before {
+    bottom: 8px;
+}
+
+.menu-btn span:after {
+    top: 8px;
+}
+
+#menu-btn-check:checked~.menu-btn span {
+    background-color: rgba(255, 255, 255, 0);
+    /*メニューオープン時は真ん中の線を透明にする*/
+}
+
+#menu-btn-check:checked~.menu-btn span::before {
+    bottom: 0;
+    transform: rotate(45deg);
+}
+
+#menu-btn-check:checked~.menu-btn span::after {
+    top: 0;
+    transform: rotate(-45deg);
+}
+
+#menu-btn-check {
+    display: none;
+}
+
+.menu-content {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 80;
+    background-color: #FFD610;
+}
+
+.menu-content ul {
+    padding: 70px 10px 0;
+}
+
+.menu-content ul li {
+    list-style: none;
+}
+
+.menu-content ul li a {
+    text-align: center;
+    display: block;
+    width: 100%;
+    font-size: 15px;
+    box-sizing: border-box;
+    color: #ffffff;
+    padding: 0px 0px 0px 0;
+    position: relative;
+    font-size: 30px;
+}
+
+.menu-content ul li p {
+    text-align: center;
+    font-size: 0.5rem;
+}
+
+.menu-content {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 100%;
+    /*leftの値を変更してメニューを画面外へ*/
+    z-index: 80;
+    background-color: #FFD610;
+    transition: all 0.5s;
+    /*アニメーション設定*/
+}
+
+#menu-btn-check:checked~.menu-content {
+    left: 0;
+    /*メニューを画面内へ*/
+}
+
+
+@media (375px < width) {
+    header .header_img {
+        background-size: cover;
+    }
+}
+
+/* service */
+
+#service {
+    position: relative;
+    padding: 120px 0;
+
+}
+
+#service .service-top {
+    left: 0;
+    padding: 40px;
+    margin: 120px 0 0;
+    max-width: 290px;
+    height: 300px;
+    background-size: auto auto;
+    background-color: rgba(229, 248, 254, 1);
+    background-image: repeating-linear-gradient(135deg, transparent, transparent 24px, rgba(215, 244, 252, 1) 24px, rgba(215, 244, 252, 1) 48px);
+    background-position: 45%;
+}
+
+#service .word1 {
+    position: relative;
+    top: -53px;
+    left: -74px;
+    border-bottom: solid 3px;
+    padding-bottom: 0.5rem;
+    width: 7.5rem;
+}
+
+#service .word2 {
+    width: 330px;
+    font-size: 24px;
+}
+
+#service .service-ul {
+    background-color: #E8E8E8;
+}
+
+#service ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    margin: 4rem 0;
+    height: 195vh;
+}
+
+#service ul>li {
+    top: -220px;
+    width: 100%;
+    height: 600px;
+}
+
+#service li {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: -200px;
+}
+
+#service h1 {
+    font-style: italic;
+    /* 斜体 */
+    position: relative;
+    /* 子要素を絶対位置にする */
+    top: 30px;
+    left: 35%;
+    font-size: 3.5rem;
+    color: #FFD610;
+    margin: 0;
+}
+
+#service ul .text {
+    background-color: #ffff;
+    position: relative;
+    top: -25px;
+    width: 96%;
+    padding: 0 0.95rem 1.5rem;
+    font-size: 0.99rem;
+}
+
+#service .top {
+    background-color: #FFD610;
+    padding: 0.8rem 1.5rem;
+    width: 88%;
+    margin: -2rem -1.5rem;
+    position: absolute;
+    z-index: 4;
+    font-size: 1.2rem;
+
+}
+
+#service .caption {
+    margin: 2rem 0 1.5rem;
+    font-size: 1.2rem;
+    border-bottom: 1px solid;
+    padding-bottom: 0.5rem;
+    width: 90%;
+}
+
+#service .sentence {
+    line-height: 1.3;
+}
+
+
+@media (768px < width) {
+    #service .service-top {
+        margin: 200px 300px 50px;
+    }
+
+    #service .service-right {
+        position: absolute;
+        flex-direction: row;
+        left: 680px;
+        top: 592px;
+        padding: 40px;
+        /* margin: 120px 0 0; */
+        /* max-width: 290px; */
+        height: 100px;
+        width: 495px;
+        background-size: auto auto;
+        background-color: rgba(255, 226, 88, 1);
+        background-image: repeating-linear-gradient(135deg, transparent, transparent 24px, rgba(254, 215, 13, 1) 24px, rgba(254, 215, 13, 1) 48px);
+        background-position: 45%;
+
+    }
+
+    #service .word1 {
+        left: -20%;
+    }
+
+    #service ul {
+        flex-direction: row;
+        position: relative;
+        top: 100px;
+        margin: 10px 232px 16rem;
+        height: 43vh;
+    }
+
+    #service .service-ul {
+        background-color: #E8E8E8;
+        height: 682px;
+    }
+
+    #service li {
+        position: relative;
+        width: 20%;
+        margin: 0 10px;
+    }
+
+    #service p.top {
+        font-size: 0.9rem;
+    }
+
+    #service ul>li:nth-of-type(1) {
+        margin-top: 0px;
+
+    }
+
+    #service ul>li:nth-of-type(2) {
+        margin-top: 100px;
+
+    }
+
+    #service ul>li:nth-of-type(3) {
+        margin-top: 200px;
+    }
+}
+
+/* information */
+#information {
+    text-align: center;
+    padding: 1.5rem 0 0;
+    margin-bottom: 120px;
+    width: 93%;
+    height: 425px;
+    position: relative;
+    /* background-size: auto auto;
+    background-color: rgba(255, 226, 88, 1);
+    background-image: repeating-linear-gradient(135deg, transparent, transparent 24px, rgba(254, 215, 13, 1) 24px, rgba(254, 215, 13, 1) 48px);*/
+}
+
+#information .information-hide {
+    text-align: center;
+    padding: 1.5rem 0 0;
+    margin-bottom: 120px;
+    width: 93%;
+    height: 425px;
+    position: absolute;
+    top: 20%;
+    left: 4%;
+    z-index: -1;
+    background-size: auto auto;
+    background-color: rgba(255, 226, 88, 1);
+    background-image: repeating-linear-gradient(135deg, transparent, transparent 24px, rgba(254, 215, 13, 1) 24px, rgba(254, 215, 13, 1) 48px);
+}
+
+#information .information-top {
+    position: absolute;
+    border-bottom: solid 3px;
+    padding-bottom: 0.5rem;
+    width: 12rem;
+    margin: -51px 0 60px 6px;
+    top: 27%;
+    left: 4%;
+}
+
+#information .information-text {
+    background-color: #ffff;
+    width: 91%;
+    border: solid 1px;
+    color: #242424;
+    height: 82%;
+    text-align: left;
+    line-height: 2rem;
+    margin-bottom: 2.5rem;
+    position: absolute;
+    top: 36%;
+    left: 5%;
+}
+
+#information .information-detail {
+    color: #242424;
+    background-color: #FFD610;
+    border-radius: 2em;
+    border: solid 1px;
+    text-decoration: none;
+    padding: 0.7rem 3rem;
+    position: absolute;
+    top: 125%;
+    left: 18%;
+}
+
+#information a:hover {
+    transform: scale(1.2);
+    color: #2CD47F;
+}
+
+#information a:active {
+    background-color: #D36922;
+}
+
+#information .information-content {
+    margin: 1.2rem 1rem;
+    display: flex;
+    flex-flow: column;
+}
+
+#information .information-content a {
+    margin: 0;
+    color: #242424;
+}
+
+@media (768px < width) {
+    #information {
+        text-align: center;
+        padding: 1.5rem 0 0;
+        margin-bottom: 120px;
+        width: 100%;
+        height: 470px;
+        position: relative;
+    }
+
+    #information .information-hide {
+        text-align: center;
+        padding: 1.5rem 0 0;
+        margin-bottom: 120px;
+        width: 100%;
+        height: 425px;
+        position: absolute;
+        top: 20%;
+        left: 0%;
+        z-index: -1;
+        background-size: auto auto;
+        background-color: rgba(255, 226, 88, 1);
+        background-image: repeating-linear-gradient(135deg, transparent, transparent 24px, rgba(254, 215, 13, 1) 24px, rgba(254, 215, 13, 1) 48px);
+    }
+
+    #information .information-content {
+        margin: 1.2rem 1rem;
+        display: flex;
+        flex-flow: row;
+    }
+
+    #information .information-text {
+        background-color: #ffff;
+        width: 50%;
+        border: solid 1px;
+        color: #242424;
+        height: 66%;
+        text-align: left;
+        line-height: 2rem;
+        margin-bottom: 2.5rem;
+        position: absolute;
+        top: 30%;
+        left: 25%;
+    }
+
+    #information .information-detail {
+        color: #242424;
+        background-color: #FFD610;
+        border-radius: 2em;
+        border: solid 1px;
+        text-decoration: none;
+        padding: 0.7rem 3rem;
+        position: absolute;
+        top: 76%;
+        left: 40%;
+    }
+
+    #information .information-text a {
+        margin-left: 60px;
+    }
+
+}
+
+
+
+
+
+
+
+
+/* recruit */
+#recruit {
+    position: relative;
+    padding: 120px 0;
+    text-align: center;
+}
+
+#recruit .recruit-top {
+    padding: 40px;
+    height: 250px;
+    max-width: 75%;
+    margin-left: 1.2rem;
+
+    background-size: auto auto;
+    background-color: rgba(229, 248, 254, 1);
+    background-image: repeating-linear-gradient(135deg, transparent, transparent 24px, rgba(215, 244, 252, 1) 24px, rgba(215, 244, 252, 1) 48px);
+}
+
+#recruit .recruit-title {
+    border-bottom: solid 3px;
+    padding-bottom: 0.5rem;
+    width: 8rem;
+    margin: -54px -37px;
+}
+
+#recruit .recruit-img {
+    height: 35vh;
+    width: 80%;
+    margin: -12px 0 0 16%;
+    background-size: auto auto;
+    background-color: rgba(255, 226, 88, 1);
+    background-image: repeating-linear-gradient(135deg, transparent, transparent 24px, rgba(254, 215, 13, 1) 24px, rgba(254, 215, 13, 1) 48px);
+}
+
+#recruit img {
+    position: absolute;
+    top: 173px;
+    left: 0;
+}
+
+#recruit .recruit-text {
+    position: absolute;
+    top: 45%;
+    left: 3%;
+    background-color: rgba(255, 255, 255, 0.7);
+    width: 80%;
+    padding: 5% 0 17% 5%;
+    text-align: left;
+
+}
+
+#recruit .recruit-text h2 {
+    font-size: 140%;
+}
+
+#recruit h2 {
+    margin: 1rem 0rem 3rem 0;
+}
+
+#recruit a {
+    text-decoration: none;
+    background-color: #242424;
+    color: #ffff;
+    padding: 0.7rem 3rem;
+    border-radius: 2em;
+}
+
+#recruit a:hover {
+    transform: scale(1.2);
+    color: #2CD47F;
+}
+
+#recruit a:active {
+  background-color: #D36922;
+}
+
+@media (768px < width) {
+    #recruit {
+        margin: 0 auto;
+        width: 60%;
+    }
+
+    #recruit img {
+        width: 70%;
+        right: -20%;
+    }
+
+    #recruit .recruit-img {
+        width: 70%;
+        margin: -12px 0 0 26%;
+    }
+
+    #recruit .recruit-text h2 {
+        font-size: 270%;
+    }
+}
+
+
+/* request */
+
+#request {
+    position: relative;
+    padding: 120px 0;
+    text-align: center;
+    margin: auto 0;
+}
+
+#request .request-text {
+    background-image: url(img/PAK85_kikaihandle20141028182041_TP_V4.jpg);
+    background-size: cover;
+    height: 40vh;
+    text-align: center;
+    padding: 49px;
+    line-height: 2rem;
+}
+
+#request .request-text h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #ffff;
+}
+
+
+#request .request-text a {
+    text-decoration: none;
+    background-color: #FFD610;
+    color: #242424;
+    border-radius: 2em;
+    padding: 0.7rem 3rem;
+}
+
+#request .request-text a:hover {
+    transform: scale(1.2);
+    color: #2CD47F;
+}
+
+#request .request-text a:active{
+   background-color: #D36922;
+}
+
+
+@media (768px < width) {
+    #request h2 {
+        font-size: 10rem;
+    }
+
+    #request img {
+        width: 100%;
+    }
+
+}
+
+
+/* call */
+
+#call {
+    position: relative;
+    height: 60vh;
+    text-align: center;
+    margin: 0px 0 0px;
+}
+
+#call img {
+    width: 40%;
+    height: 40%;
+}
+
+#call p {
+    font-size: 0.7rem;
+}
+
+#call a {
+    text-decoration: none;
+    background-color: #242424;
+    color: #ffff;
+    border-radius: 2em;
+    padding: 0.7rem 3rem;
+}
+
+#call a:hover {
+    transform: scale(1.2);
+    color: #2CD47F;
+}
+
+#call a:active {
+    background-color: #D36922;
+}
+
+/* footer */
+footer {
+    text-align: center;
+    padding: 2rem;
+    background-size: auto auto;
+    background-color: rgba(255, 226, 88, 1);
+    background-image: repeating-linear-gradient(135deg, transparent, transparent 24px, rgba(254, 215, 13, 1) 24px, rgba(254, 215, 13, 1) 48px);
+}
